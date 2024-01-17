@@ -15,6 +15,8 @@ class SaveExchangeRateAPIToDB implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+     public $tries = 2;
+
     /**
      * Create a new job instance.
      */
@@ -53,9 +55,7 @@ class SaveExchangeRateAPIToDB implements ShouldQueue
             \Log::info('Data Already exists');
             return;
         }
-       
     }
-    
 
     /*
     * Store in Base table
@@ -67,9 +67,7 @@ class SaveExchangeRateAPIToDB implements ShouldQueue
             'currency' => $response->base,
             'generated_at' => $date->setTimestamp($response->timestamp),
 
-        ]);
-        
-        
+        ]); 
     } 
 
     /*

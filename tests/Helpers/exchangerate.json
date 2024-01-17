@@ -1,0 +1,12 @@
+{
+disclaimer: "Usage subject to terms: https://openexchangerates.org/terms",
+license: "https://openexchangerates.org/license",
+timestamp: 1705510800,
+base: "USD",
+rates: {
+	AED: 3.67275,
+	AFN: 71.168521,
+	ALL: 95.458697,
+	AMD: 404.447037,
+	ANG: 1.802179,
+}
