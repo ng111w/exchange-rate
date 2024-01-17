@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bases', function (Blueprint $table) {
+        Schema::create('rates', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('base_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('currency');
-            $table->timestamp('generated_at');
+            $table->float('amount', null, null); // difference in float, decimal and double
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bases');
+        Schema::dropIfExists('rates');
     }
 };
