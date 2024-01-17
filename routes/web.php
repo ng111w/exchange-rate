@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    // (new \App\Jobs\GetExchangeRateAPI())->handle();
+    $tosin = "a  string";
+    \App\Jobs\SaveApiResponseToDB::dispatch($tosin);
     return view('welcome');
 });
 
