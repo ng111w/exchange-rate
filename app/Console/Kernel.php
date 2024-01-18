@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         // $schedule->command('app:get-exchange-rate-a-p-i')->everyMinute();
         
-        $schedule->job(new SaveExchangeRateAPIToDB, 'exchangerates', env('QUEUE_CONNECTION', 'database'))->dailyAt('06:00');
+        $schedule->job(new SaveExchangeRateAPIToDB, 'exchangerates', env('QUEUE_CONNECTION', 'database'))->dailyAt(env('SCHEDULER_QUEUE_TIME'));
     }
 
     /**
