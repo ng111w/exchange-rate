@@ -1,6 +1,7 @@
 <?php
 namespace App\APIs; 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class ExchangeRateAPI{
 
@@ -28,11 +29,11 @@ class ExchangeRateAPI{
 
 	        if($response->ok())
 	        {
-	        	\Log::info("API access successful!");
+	        	Log::info("API access successful!");
 	            return $response = json_decode($response);  
 	        }
 	        else{
-	            \Log::info('API access failed!');
+	            Log::info('API access failed!');
 	            return 'no response';
 	        }
 	    }
