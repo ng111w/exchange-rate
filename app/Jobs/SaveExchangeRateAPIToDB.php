@@ -10,6 +10,8 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\APIs\ExchangeRateAPI;
 use App\Models\Base;
+use Mail;
+use App\Mail\NotifyMail;
 
 class SaveExchangeRateAPIToDB implements ShouldQueue
 {
@@ -39,7 +41,7 @@ class SaveExchangeRateAPIToDB implements ShouldQueue
         }
     }
 
-    /*
+    /**
     * Check if base currency exisits with certian timestamp before attempting to update DB
     */
     private function saveData($response)
@@ -49,11 +51,30 @@ class SaveExchangeRateAPIToDB implements ShouldQueue
                             ->where('generated_at', $date->setTimestamp($response->timestamp));                           
         if($baseCurrency->doesntexist())
         {
-            return $this->createRates($response, $this->createBase($response));
+            // save data
+            $this->createRates($response, $this->createBase($response));
+            
+            // email notification
+            return $this->notifyAdministrator();
+            
         }
         else{
             \Log::info('Data Already exists');
             return;
+        }
+    }
+
+
+    /**
+        Send email notification to user
+    */
+    private function notifyAdministrator()
+    {
+        try{
+            Mail::to( env("MAIL_ADMIN",'test@test.com'))->send(new NotifyMail());
+        }
+        catch(\Exception $ex){
+            \Log::info("Send mail failed. Contact your administrator");
         }
     }
 
