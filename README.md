@@ -52,6 +52,12 @@ For example by the time you're running the code, if your time is 05:53, set SCHE
 - You should get a success message within the log file.
 - If there is an issue, check the log as well and see the "failed_jobs" table
 
+## To search for exchange rates by dates
+- visit "/search" and select availble dates and time from the drop down, click search and result should be displayed.
+
 ## Miscellaneous
 - The following property should be kept as they are, within the .env file
 EXCHANGE_RATE_URL, EXCHANGE_RATE_API, EXCHANGE_RATE_SYMBOLS
+
+## Contact
+If you have any issue with any portion of this code, please contact me on nolimit.gws@gmail.com
